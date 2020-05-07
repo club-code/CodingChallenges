@@ -39,6 +39,7 @@ open class GenericTest {
         setOldOutput()
 
         Assert.assertEquals(answer.readText(), o.toString())
+        o.close()
     }
 
     fun setOldInput() = System.setIn(oldInput)

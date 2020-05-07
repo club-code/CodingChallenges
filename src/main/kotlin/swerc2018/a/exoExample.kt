@@ -2,7 +2,7 @@ package swerc2018.a
 
 import java.util.*
 
-fun main(){
+fun mainExample(){
     val input = Scanner(System.`in`)
 
     val N = input.nextInt()
