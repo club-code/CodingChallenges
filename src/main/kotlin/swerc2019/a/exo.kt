@@ -1,6 +1,5 @@
 package swerc2019.a
 
-import java.lang.Integer.max
 import java.util.*
 import kotlin.math.ceil
 import kotlin.math.pow
@@ -73,10 +72,8 @@ class Graph(val nbNodes: Int) {
         values[start][end] = cost
     }
 
-    fun dijkstraMax(max: Int, dest: Int): Int {
-        //System.err.println(values)
-        val dist = arrayOfNulls<Cost>(nbNodes)
-        dist[0] = Cost(0, 0)
+    fun dijkstraMax(max: Int, dest: Int): Int? {
+        val distCO2 = MutableList(nbNodes) { Int.MAX_VALUE }
 
         val priorityQueue = PriorityQueue<Node>()
 
@@ -84,28 +81,34 @@ class Graph(val nbNodes: Int) {
 
         while (priorityQueue.isNotEmpty()) {
             val node = priorityQueue.poll()
-            //System.err.println("node: $node")
-            if (node.i == dest)
-                return node.cost.CO2
-            for (v in values[node.i].indices) {
-                val neighbor = values[node.i][v]
-                if (neighbor != null) {
-                    //System.err.println("   neighbor: $v")
-                    val alt = node.cost + neighbor
+//            System.err.println("node: $node, dist: ${distCO2[node.i]}")
+            val lastLink = values[node.i][dest]!!
+            val last = lastLink + node.cost
+            if (last.distance <= max && last.CO2 < distCO2[node.i]) {
+                distCO2[node.i] = last.CO2
+            }
+            if (last.distance <= max) {
+                for (v in values[node.i].indices) {
+                    if (v != dest) {
+                        val linkCost = values[node.i][v]
+                        if (linkCost != null) {
+//                            System.err.println("   neighbor: $v")
+                            val alt = node.cost + linkCost
 
-                    if (alt.distance <= max &&
-                        (alt.distance < dist[v]?.distance ?: Int.MAX_VALUE ||
-                                alt.CO2 < dist[v]?.CO2 ?: Int.MAX_VALUE)
-                    ) {
-                        if (alt.distance < dist[v]?.distance ?: Int.MAX_VALUE && alt.CO2 < dist[v]?.CO2 ?: Int.MAX_VALUE)
-                            dist[v] = alt
-                        //System.err.println("      v: $v, alt: $alt")
-                        priorityQueue.add(Node(v, alt))
+                            if (alt.distance <= max) {
+                                priorityQueue.add(Node(v, alt))
+                            }
+                        }
                     }
                 }
             }
+            if(priorityQueue.size % 10_000 == 0)
+                System.err.println(priorityQueue.size)
         }
-        return -1
+
+        System.err.println(distCO2)
+        val min = distCO2.min()
+        return if(min == Int.MAX_VALUE) -1 else min
     }
 
 }
