@@ -10,20 +10,32 @@ La racine du projet contient un répertoire par concours/batailles de code, qui 
 ├── advent-of-code
 │   └── 2020
 │       ├── jvm
+│       ├── resources
 ```
 
-Chaque langage a sa propre structure de dossier qui doit être identique afin de simplifier la prise en main. Toutes les instructions nécessaires à l'exécution des tests.
+Toutes les sessions des concours ***DOIVENT*** être appelées sous la forme `YYYY` (par exemple `2020`) s'il n'y a qu'une édition par année ou sous la forme `mmm-YYYY`  (par exemple `nov-2020`) s'il y a plusieurs éditions par an. On *PEUT* également préciser le type de l'événement (par exemple `2019-training`). De plus la session ***DOIT*** contenir un dossier *resources* au même niveau que celui des langages.
 
-Les solutions doivent récupérer les entrées par le **stdin** (Entrée standard) et donner les réponses par le **stdout** (Sortie standard). En effet, il est important d'assurer la compatibilité des exécutions et **TOUS** les concours utilisent, pour leurs plateformes automatisées, les entrées/sorties standards.
+Les ressources de tests (entrées et sorties attendues) ***DOIVENT*** se trouver dans le sous-dossier *resources* avec l'arborescences ci-dessous.
+Chaque dossier **DOIT** reprendre la terminologie du concours (dans l'exemple *day*), on prendra par défaut *exercise*, suivi du numéro de l'exercice.
+
+```
+└── resources
+    ├── day1
+    └── day9
+```
+
+Chaque langage a sa propre structure de dossier qui ***DOIT*** être identique entre les projets, afin de simplifier la prise en main. Ce README ***DOIT*** contenir toutes les instructions nécessaires à l'exécution des tests.
+
+Les solutions ***DOIVENT*** récupérer les entrées par le **stdin** (Entrée standard) et donner les réponses par le **stdout** (Sortie standard). En effet, il est important d'assurer la compatibilité des exécutions et **TOUS** les concours utilisent, pour leurs plateformes automatisées, les entrées/sorties standards.
 
 Attention, ces structures et instructions sont vouées à évoluer au cours du temps.
-
 
 ### JVM
 
 #### Structure
 
-Ce sont des projets [Gradle](https://gradle.org/) avec une structure qui est défini ci-dessous. On notera la présence de *package* pour chacun des exercices. Ainsi les fonctions/classes nécessaires (main) et les tests (test) se trouvent dans ce *package*. De plus les resources de tests se trouvent sous la même hiérarchie mais ici dans un simple dossiers du même nom que le *package*.
+Ce sont des projets [Gradle](https://gradle.org/) avec une structure qui est défini ci-dessous. On notera la présence de *package* pour chacun des exercices. Ainsi les fonctions/classes nécessaires (main) et les tests (test) se trouvent dans ce *package*.
+Le dossier *resources* ***DOIT*** être un lien symbolique vers le dossier parent `../../../resources`.
 
 ```
 └── src
@@ -33,20 +45,22 @@ Ce sont des projets [Gradle](https://gradle.org/) avec une structure qui est dé
     │   │   ├── day1
     │   │   ├── day9
     │   │   └── library
-    │   └── resources
+    │   └── resources (à priori rien)
     └── test
         ├── java
         ├── kotlin
         │   ├── day1
         │   └── day9
-        └── resources
-            ├── day1
-            └── day9
+        └── resources (lien symbolique vers ../../../resources)
 ```
 
-##### Du nommage des packages
+##### De la nomenclature des *packages*
 
-Chaque package doit reprendre la terminologie du concours (dans l'exemple *day*), on prendra par défaut *exercise* suivi du numéro de l'exercice.
+On ***DOIT*** suivre la nomenclature des sous-dossiers de ressources et en adopter le même nom (par exemple *day1*).
+
+#### Règles à respecter
+
+Il *FAUDRAIT* que les conventions pour chacun des langages soient respectées le plus possible dans les solutions afin d'être lisible par le plus grand nombre.
 
 #### Exécution des tests
 
