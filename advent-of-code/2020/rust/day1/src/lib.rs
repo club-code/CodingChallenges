@@ -1,6 +1,9 @@
 use anyhow::Result;
 use std::io;
 
+/// Parses each line of the standard input stream into a vector of integers.
+///
+/// Uses `anyhow` in order to convert error types for the caller.
 pub fn parse_numbers() -> Result<Vec<u32>> {
     let stdin = io::stdin();
     let mut lines = Vec::new();

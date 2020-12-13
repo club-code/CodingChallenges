@@ -1,6 +1,8 @@
 use anyhow::Result;
 use day1::parse_numbers;
 
+/// Performs a dichotomic search of the number in the given sorted array.
+/// Returns `true` if and only if `arr` contains `num`.
 fn dicho_search(num: u32, arr: &[u32]) -> bool {
     let mut start = 0;
     let mut end = arr.len();
@@ -20,6 +22,8 @@ fn dicho_search(num: u32, arr: &[u32]) -> bool {
     false
 }
 
+/// Solves the first part by sorting the input and trying to find the complement
+/// of each number using a search by dichotomy.
 fn main() -> Result<()> {
     let mut numbers = parse_numbers()?;
     numbers.sort();
