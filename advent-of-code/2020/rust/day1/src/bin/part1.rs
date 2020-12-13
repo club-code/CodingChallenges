@@ -1,22 +1,5 @@
 use anyhow::Result;
-use std::io;
-
-fn parse_numbers() -> Result<Vec<u32>> {
-    let stdin = io::stdin();
-    let mut lines = Vec::new();
-
-    loop {
-        let mut line = String::new();
-
-        if stdin.read_line(&mut line)? == 0 {
-            break;
-        } else {
-            lines.push(line.trim_end().parse()?);
-        }
-    }
-
-    Ok(lines)
-}
+use day1::parse_numbers;
 
 fn dicho_search(num: u32, arr: &[u32]) -> bool {
     let mut start = 0;
