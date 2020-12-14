@@ -1,6 +1,7 @@
 use anyhow::Result;
 use std::io;
 
+/// Solves the second part by... parsing and counting!
 fn main() -> Result<()> {
     let stdin = io::stdin();
     let mut line = String::new();
@@ -12,6 +13,7 @@ fn main() -> Result<()> {
         let letter = parts[1].as_bytes()[0];
         let pswd = parts[2].as_bytes();
 
+        // This time, the iterator can be used directly.
         count += (parts[0]
             .splitn(2, '-')
             .map(|s| s.parse::<usize>().unwrap())
