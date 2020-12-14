@@ -1,19 +1,7 @@
 use anyhow::Result;
-use day4::parse_passport;
+use day4::{count_valid_passports, validate_passport1};
 
-fn main() -> Result<()> {
-    let mut valid = 0;
-
-    loop {
-        let pass = parse_passport()?;
-
-        if pass.is_empty() {
-            break;
-        } else {
-            valid += (pass.len() == 8 || pass.len() == 7 && !pass.contains("cid")) as u16;
-        }
-    }
-
-    println!("{}", valid);
+pub fn main() -> Result<()> {
+    println!("{}", count_valid_passports(validate_passport1)?);
     Ok(())
 }
