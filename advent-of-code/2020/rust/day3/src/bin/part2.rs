@@ -1,6 +1,8 @@
 use anyhow::Result;
 use day3::{mult_counts, parse_grid};
 
+/// Solves part 1 by directly using `mult_counts` and manually listing
+/// the desired slopes.
 pub fn main() -> Result<()> {
     println!(
         "{}",
