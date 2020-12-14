@@ -13,3 +13,18 @@ pub fn parse_grid() -> Result<Vec<Vec<bool>>> {
 
     Ok(grid)
 }
+
+pub fn count_trees(grid: &Vec<Vec<bool>>, (down, right): (usize, usize)) -> usize {
+    let width = grid[0].len();
+    (0..grid.len())
+        .step_by(down)
+        .filter(|&i| grid[i][i / down * right % width])
+        .count()
+}
+
+pub fn mult_counts(grid: &Vec<Vec<bool>>, slopes: &[(usize, usize)]) -> usize {
+    slopes
+        .iter()
+        .map(|&slope| count_trees(grid, slope))
+        .product()
+}
