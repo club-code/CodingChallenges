@@ -1,5 +1,10 @@
-use anyhow::Result;
+use std::collections::HashSet;
 use std::io;
+
+use anyhow::Result;
+
+pub const ROWS: u8 = 128;
+pub const COLS: u8 = 8;
 
 #[derive(Debug)]
 enum BinStep {
@@ -17,21 +22,36 @@ impl From<char> for BinStep {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Hash, PartialEq, Eq)]
 pub struct BoardPass {
-    row: u8,
-    col: u8,
+    pub row: u8,
+    pub col: u8,
 }
 
 impl BoardPass {
     pub fn id(&self) -> u16 {
-        8 * self.row as u16 + self.col as u16
+        COLS as u16 * self.row as u16 + self.col as u16
+    }
+
+    pub fn next(&self, places: u8) -> Self {
+        Self::from_id(self.id() + places as u16)
+    }
+
+    pub fn prev(&self, places: u8) -> Self {
+        Self::from_id(self.id() - places as u16)
+    }
+
+    fn from_id(id: u16) -> Self {
+        Self {
+            row: (id / COLS as u16) as u8,
+            col: (id % COLS as u16) as u8,
+        }
     }
 
     fn from_steps(steps: &[BinStep]) -> Self {
         Self {
-            row: Self::follow_steps(&steps[..6], 127),
-            col: Self::follow_steps(&steps[7..], 7),
+            row: Self::follow_steps(&steps[..7], ROWS),
+            col: Self::follow_steps(&steps[7..], COLS),
         }
     }
 
@@ -48,17 +68,17 @@ impl BoardPass {
             }
         }
 
-        start + 1
+        start
     }
 }
 
-pub fn parse_passes() -> Result<Vec<BoardPass>> {
+pub fn parse_passes() -> Result<HashSet<BoardPass>> {
     let stdin = io::stdin();
     let mut line = String::new();
-    let mut passes = Vec::new();
+    let mut passes = HashSet::new();
 
     while stdin.read_line(&mut line)? != 0 {
-        passes.push(BoardPass::from_steps(
+        passes.insert(BoardPass::from_steps(
             &line
                 .trim_end()
                 .chars()
