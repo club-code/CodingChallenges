@@ -14,7 +14,7 @@ fn main() -> Result<()> {
         } else {
             sum += group
                 .into_iter()
-                .fold_first(|elt, acc| &acc | &elt)
+                .fold_first(|elt, acc| &acc & &elt)
                 .unwrap()
                 .len();
         }
