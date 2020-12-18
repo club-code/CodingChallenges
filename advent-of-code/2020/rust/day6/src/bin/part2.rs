@@ -3,6 +3,8 @@
 use anyhow::Result;
 use day6::parse_next_group;
 
+/// Solves part 1 by computing the intersections of groups people's answers
+/// and then summing all their respective lengths together.
 fn main() -> Result<()> {
     let mut sum = 0;
 
