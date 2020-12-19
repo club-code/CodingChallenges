@@ -1,6 +1,7 @@
 use anyhow::Result;
 use day7::{parse_rules, Rules, TypeCount};
 
+/// Solves part 1 by counting the bags containing gold.
 fn main() -> Result<()> {
     let rules = parse_rules()?;
     println!(
@@ -13,6 +14,8 @@ fn main() -> Result<()> {
     Ok(())
 }
 
+/// Returns `true` iff `counts` directly or indirectly contains a "shiny gold"
+/// colored bag following the given `rules`. Operates recursively.
 fn contains_gold(rules: &Rules, counts: &[TypeCount]) -> bool {
     counts
         .iter()

@@ -3,10 +3,13 @@ use std::io::{self, BufRead};
 
 use anyhow::Result;
 
+// Because I can.
 pub type BagType = String;
 pub type TypeCount = (BagType, u16);
 pub type Rules = HashMap<BagType, Vec<TypeCount>>;
 
+/// Parses the standard input stream lines into a map of bag colors to
+/// couples of contained bag count and color.
 pub fn parse_rules() -> Result<Rules> {
     let mut rules = HashMap::new();
 
