@@ -1,17 +1,14 @@
 use anyhow::Result;
-use std::io;
+use std::io::{self, BufRead};
 
 /// Parses the standard input in a grid of booleans: `true` iff a tree.
 /// Note that the use of `Vec<Vec<bool>>` is not the most efficient, it
 /// is just the easiest here.
 pub fn parse_grid() -> Result<Vec<Vec<bool>>> {
-    let stdin = io::stdin();
-    let mut line = String::new();
     let mut grid = Vec::new();
 
-    while stdin.read_line(&mut line)? != 0 {
-        grid.push(line.trim_end().chars().map(|chr| chr == '#').collect());
-        line.clear();
+    for line in io::stdin().lock().lines() {
+        grid.push(line?.trim_end().chars().map(|chr| chr == '#').collect());
     }
 
     Ok(grid)

@@ -1,5 +1,5 @@
 use std::collections::HashSet;
-use std::io;
+use std::io::{self, BufRead};
 
 use anyhow::Result;
 
@@ -86,19 +86,16 @@ impl BoardPass {
 
 /// Reads the lines from the standard input into a set of boarding passes.
 pub fn parse_passes() -> Result<HashSet<BoardPass>> {
-    let stdin = io::stdin();
-    let mut line = String::new();
     let mut passes = HashSet::new();
 
-    while stdin.read_line(&mut line)? != 0 {
+    for line in io::stdin().lock().lines() {
         passes.insert(BoardPass::from_steps(
-            &line
+            &line?
                 .trim_end()
                 .chars()
                 .map(BinStep::from)
                 .collect::<Vec<_>>(),
         ));
-        line.clear();
     }
 
     Ok(passes)

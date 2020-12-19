@@ -1,13 +1,12 @@
 use anyhow::Result;
-use std::io;
+use std::io::{self, BufRead};
 
 /// Solves the second part by... parsing and counting!
 fn main() -> Result<()> {
-    let stdin = io::stdin();
-    let mut line = String::new();
     let mut count = 0;
 
-    while stdin.read_line(&mut line)? != 0 {
+    for line in io::stdin().lock().lines() {
+        let line = line?;
         let parts = line.split_whitespace().collect::<Vec<_>>();
 
         let letter = parts[1].as_bytes()[0];
@@ -20,8 +19,6 @@ fn main() -> Result<()> {
             .filter(|&n| pswd[n - 1] == letter)
             .count()
             == 1) as u16;
-
-        line.clear();
     }
 
     println!("{}", count);
