@@ -3,7 +3,7 @@ package day11
 import org.clubcode.library.test.GenericTest
 import org.junit.Test
 
-class Day : GenericTest() {
+class TestDay : GenericTest() {
 
     @Test
     fun testSample() {

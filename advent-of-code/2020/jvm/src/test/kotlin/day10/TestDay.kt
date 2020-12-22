@@ -5,7 +5,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 
-class Day : GenericTest() {
+class TestDay : GenericTest() {
 
     @Test
     fun testSample() {

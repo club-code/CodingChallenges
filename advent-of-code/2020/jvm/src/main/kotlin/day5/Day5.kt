@@ -14,6 +14,5 @@ fun mainPart2() {
 fun String.toId(): Int {
     val row = this.take(7).replace('F', '0').replace('B', '1').toInt(2)
     val column = this.takeLast(3).replace('R', '1').replace('L', '0').toInt(2)
-    column.also {  }
     return row * 8 + column
 }
