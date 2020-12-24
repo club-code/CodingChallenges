@@ -4,7 +4,7 @@
 
 ### Partie 1
 
-Trouver deux nombres parmi les entrées (cf ci-dessous) dont la somme vaut
+Trouver deux nombres parmi les entrées (cf. ci-dessous) dont la somme vaut
 `2020`. Renvoyer leur produit.
 
 ```
@@ -16,13 +16,13 @@ Trouver deux nombres parmi les entrées (cf ci-dessous) dont la somme vaut
 1456
 ```
 
-Exemple: `1721` et `299` dont le produit vaut `514579`
+Exemple: `1721` et `299` dont le produit vaut `514579`.
 
 
 ### Partie 2
 
-Trouver trois nombre parmi les entrées dont la somme vaut `2020`. Renvoyer leur
-produit.
+Trouver trois nombres parmi les entrées dont la somme vaut `2020`. Renvoyer
+leur produit.
 
 Exemple: `979`, `366` et `675` dont le produit vaut `241861950`.
 
@@ -50,9 +50,9 @@ for each x in l do
 			return x * y
 ```
 
-`l.after(x)` étant la sous liste des éléments suivant `x` dans la liste (on
-pourrait de façon équivalent démarrer avec les indices strictement supérieurs à
-celui de `x`).
+`l.after(x)` étant la sous-liste des éléments suivant `x` dans la liste (on
+pourrait de façon équivalente démarrer avec les indices strictement supérieurs
+à celui de `x`).
 
 La complexité est ici alors de `O(n * (n+1) / 2)` (dénombrement `n + (n-1) +
 ... + 1` ) qui est équivalent à `O(n²)`.
@@ -81,12 +81,12 @@ while l[i] + l[j] != 2020 do
 ```
 
 La complexité plus précisément est de `O(n * ln n)` pour le tri et `O(n)` pour
-la boucle while, finalement on a `O(n * ln n)`.
+la boucle `while`, finalement on a `O(n * ln n)`.
 
 
 ### Solution n°2 - Complexité `O(n)`
 
-Utiliser la structure de donnée *ensemble* qui permet de tester en `O(1)` pour
+Utiliser la structure de données *ensemble* qui permet de tester en `O(1)` pour
 chaque valeur de la liste si `2020 - valeur` existe.
 
 ```python
@@ -149,13 +149,13 @@ for k in l.indices do
 ```
 
 La complexité est `O(n * ln n)` pour le tri et `O(n * (n+1) / 2)` pour les
-tours de boucles on a alors une complexité `O(n²)`.
+tours de boucles, on a alors une complexité `O(n²)`.
 
 
 ### Solution n°2 - Complexité `O(n²)`
 
 De même que la solution n°2 de la partie 1, on utilise un *ensemble* afin
-d'optimiser la recherche de `2020 - x - y` pour tout x, y dans la liste.
+d'optimiser la recherche de `2020 - x - y` pour tout `(x, y)` dans `liste²`.
 
 ```python
 s = l.toSet()
