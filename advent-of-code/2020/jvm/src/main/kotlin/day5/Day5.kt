@@ -2,7 +2,7 @@ package day5
 
 fun main() {
     val inputs = generateSequence(::readLine).map { it.toId() }
-    println(inputs.max())
+    println(inputs.maxOrNull())
 }
 
 fun mainPart2() {

@@ -1,7 +1,7 @@
 package day20
 
-import library.Vector2
 import org.clubcode.library.collection.split
+import org.clubcode.library.math.IntVector2
 
 fun main() {
     val inputs = generateSequence(::readLine).split { it.isEmpty() }.map { it.toTile() }.toList()
@@ -69,7 +69,7 @@ fun fill(map: MutableMap<Tile, Pair<Int, Int>>, solutions: Map<Int, List<Tile>>,
 }
 
 //fun List<Pair<Int, Int>>.findTripleCase(): Pair<Int, Int> {
-//    val x = this.take(3).map { it.toVector2() }
+//    val x = this.take(3).map { it.toIntVector2() }
 //    val x1 = x[0]
 //    val x2 = x[1]
 //    val x3 = x[2]
@@ -89,8 +89,8 @@ fun fill(map: MutableMap<Tile, Pair<Int, Int>>, solutions: Map<Int, List<Tile>>,
 //
 //}
 
-fun Pair<Int, Int>.toVector2(): Vector2 {
-    return Vector2(this.first, this.second)
+fun Pair<Int, Int>.toIntVector2(): IntVector2 {
+    return IntVector2(this.first, this.second)
 }
 
 const val SIZE = 10

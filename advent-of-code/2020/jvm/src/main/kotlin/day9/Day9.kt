@@ -31,7 +31,7 @@ fun List<Long>.contiguous(value: Long): Long {
         }
 
         if(sum == value)
-            return this.subList(i, end+1).max()!! + this.subList(i, end+1).min()!!
+            return this.subList(i, end+1).maxOrNull()!! + this.subList(i, end+1).minOrNull()!!
     }
     return -1L
 }
