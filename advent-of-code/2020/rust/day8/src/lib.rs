@@ -4,7 +4,7 @@ use std::str::FromStr;
 use anyhow::{bail, Error, Result};
 
 #[derive(Debug, Clone)]
-enum Operation {
+pub enum Operation {
     Accumulate,
     Jump,
     Nothing,
@@ -25,8 +25,8 @@ impl FromStr for Operation {
 
 #[derive(Debug, Clone)]
 pub struct Instruction {
-    op: Operation,
-    arg: i16,
+    pub op: Operation,
+    pub arg: i16,
     pub passes: u8,
 }
 
@@ -63,29 +63,33 @@ impl<'a> Evaluator<'a> {
     pub fn new(ins: &'a mut [Instruction]) -> Self {
         Self { ins, pc: 0, acc: 0 }
     }
+
+    pub fn eval_until_loop(&mut self) -> <Self as Iterator>::Item {
+        self.take_while(|(_, _, ins)| ins.passes != 2)
+            .last()
+            .unwrap()
+    }
 }
 
 impl<'a> Iterator for Evaluator<'a> {
-    type Item = (i32, i32, Instruction, Instruction);
+    type Item = (usize, i32, Instruction);
 
     fn next(&mut self) -> Option<Self::Item> {
-        let old_acc = self.acc;
-        let ins = &mut self.ins[self.pc];
-        ins.passes += 1;
-        let old_ins = ins.clone();
-
-        match ins.op {
-            Operation::Accumulate => self.acc += ins.arg as i32,
-            Operation::Jump => self.pc = (self.pc as isize + ins.arg as isize) as usize - 1,
-            Operation::Nothing => {}
-        }
-
-        self.pc += 1;
-
-        if self.pc < self.ins.len() {
-            Some((old_acc, self.acc, old_ins, self.ins[self.pc].clone()))
-        } else {
+        if self.pc >= self.ins.len() {
             None
+        } else {
+            let ins = &mut self.ins[self.pc];
+            ins.passes += 1;
+            let old_ins = ins.clone();
+
+            match ins.op {
+                Operation::Accumulate => self.acc += ins.arg as i32,
+                Operation::Jump => self.pc = (self.pc as isize + ins.arg as isize) as usize - 1,
+                Operation::Nothing => {}
+            }
+
+            self.pc += 1;
+            Some((self.pc, self.acc, old_ins))
         }
     }
 }
