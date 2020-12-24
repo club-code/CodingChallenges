@@ -31,4 +31,9 @@ tasks {
     compileTestKotlin {
         kotlinOptions.jvmTarget = "1.8"
     }
+    test {
+        onlyIf {
+            project.hasProperty("forceTests")
+        }
+    }
 }
