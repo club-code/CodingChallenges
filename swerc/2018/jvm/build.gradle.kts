@@ -24,6 +24,9 @@ dependencies {
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
 }
+
+var skipTests: Boolean by extra { properties.getOrDefault("skipTests", false) as Boolean }
+
 tasks {
     compileKotlin {
         kotlinOptions.jvmTarget = "1.8"
@@ -31,9 +34,10 @@ tasks {
     compileTestKotlin {
         kotlinOptions.jvmTarget = "1.8"
     }
+    build {
+        skipTests = true
+    }
     test {
-        onlyIf {
-            project.hasProperty("forceTests")
-        }
+        onlyIf { !skipTests }
     }
 }
