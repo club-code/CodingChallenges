@@ -29,7 +29,10 @@ fun main() {
             }
         }
     }
-    println(graph
-        .dijkstra(0, Int.MAX_VALUE).second
-        .map { (it-1)%M }.drop(1).dropLast(1).joinToString(" "))
+    val dijkstra = graph.dijkstra(0, Int.MAX_VALUE)
+    if (dijkstra.first <= A)
+        println(dijkstra.second
+            .map { (it-1)%M }.drop(1).dropLast(1).joinToString(" "))
+    else
+        println("IMPOSSIBLE")
 }
