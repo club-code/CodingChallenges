@@ -10,4 +10,9 @@ class TestExercise : GenericTest() {
         genericTest("/exercise3/sample.in", "/exercise3/sample.ans", ::main)
     }
 
+    @Test
+    fun testImpossible() {
+        genericTest("/exercise3/sampleImpossible.in", "/exercise3/sampleImpossible.ans", ::main)
+    }
+
 }

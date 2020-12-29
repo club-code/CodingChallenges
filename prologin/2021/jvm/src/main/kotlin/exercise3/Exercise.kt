@@ -1,12 +1,12 @@
 package exercise3
 
-import org.clubcode.library.math.*
+import org.clubcode.library.graph.*
 
 fun main() {
     val A = readLine()!!.toInt()
     val N = readLine()!!.toInt()
     val M = readLine()!!.toInt()
-    val graph = WeightedDirectedGraph<Int, Int>()
+    val graph = DirectedWeightedGraph<Int, Int>()
 
     val inputs = generateSequence(::readLine).map {
         it.split(" ").map { s -> s.toInt() }
