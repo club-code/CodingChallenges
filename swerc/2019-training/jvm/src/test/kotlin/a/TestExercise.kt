@@ -1,3 +1,4 @@
+@file:Suppress("EXPERIMENTAL_API_USAGE")
 package a
 
 import org.clubcode.library.test.GenericTest
