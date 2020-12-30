@@ -1,0 +1,5 @@
+package d
+
+fun main() {
+
+}
