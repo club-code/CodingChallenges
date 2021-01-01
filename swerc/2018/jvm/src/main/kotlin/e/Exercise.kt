@@ -22,27 +22,25 @@ fun main(){
             println("${values[0].first} 100.00 100.00")
         else
             println("IMPOSSIBLE")
-        return
-    }
-    val sum = values.map{it.second}.reduce { acc, it -> acc+it }
-    val delta = 100 - sum
-    val dmax = delta - (N-1)*0.49
-//    val emax = (0.49+delta)/(N-1)
-    if(dmax in -0.50..0.49)
-        values.map {
-            val min = "%.2f".format(Locale.ENGLISH, (max(0.0, it.second + dmax)).round(2))
-            val max = "%.2f".format(Locale.ENGLISH, (min(100.0,it.second + (delta-dmax)/(N-1))).round(2))
-            println("${it.first} $min $max")
+    } else {
+        val mins = values.map { max(0.0, it.second - 0.5) }
+        val maxs = values.map { min(100.0, it.second + 0.49) }
+        val minSum = mins.sum()
+        val maxSum = maxs.sum()
+
+        if (minSum > 100.0 || maxSum < 100.0) {
+            println("IMPOSSIBLE")
+        } else {
+            val realMin = values.zip(mins).mapIndexed { index, it ->
+                it.first.first to max(it.second, maxs[index] - (maxSum - 100))
+            }
+            val realMax = values.zip(maxs).mapIndexed { index, it ->
+                it.first.first to min(it.second, mins[index] - (minSum - 100))
+            }
+            realMin.zip(realMax).forEach {
+                println("${it.first.first} %.2f %.2f".format(Locale.ENGLISH, it.first.second, it.second.second))
+            }
         }
-    else if(delta < 0){
-        println("cas à prévoir")
-    } else
-        println("IMPOSSIBLE")
-}
+    }
 
-
-fun Double.round(decimals: Int): Double {
-    var multiplier = 1.0
-    repeat(decimals) { multiplier *= 10 }
-    return round(this * multiplier) / multiplier
 }
