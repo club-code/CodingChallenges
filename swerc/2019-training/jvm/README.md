@@ -1,3 +1,0 @@
-# CodingChallenges - JVM (Java, Kotlin, ...)
-
-

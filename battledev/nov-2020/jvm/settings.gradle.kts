@@ -1,2 +1,2 @@
-rootProject.name = "CodingChallenges"
+rootProject.name = "Battledev Nov2020"
 

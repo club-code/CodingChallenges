@@ -1,6 +1,6 @@
 package day12
 
-import org.clubcode.library.math.*
+import org.clubcode.library.vector.*
 
 
 fun main() {

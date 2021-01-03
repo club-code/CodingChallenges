@@ -1,7 +1,7 @@
 package f
 
 import org.clubcode.library.collection.split
-import org.clubcode.library.math.LongVector2
+import org.clubcode.library.vector.LongVector2
 import kotlin.math.abs
 import kotlin.math.absoluteValue
 

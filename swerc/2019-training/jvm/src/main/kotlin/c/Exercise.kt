@@ -1,6 +1,6 @@
 package c
 
-import org.clubcode.library.math.IntVector2
+import org.clubcode.library.vector.IntVector2
 import kotlin.math.*
 
 fun main() {

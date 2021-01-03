@@ -1,6 +1,6 @@
 package b
 
-import org.clubcode.library.math.IntVector2
+import org.clubcode.library.vector.IntVector2
 
 fun main() {
     val hidings = generateSequence(::readLine).drop(1).map {

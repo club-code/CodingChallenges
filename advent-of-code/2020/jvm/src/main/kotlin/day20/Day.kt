@@ -1,7 +1,7 @@
 package day20
 
 import org.clubcode.library.collection.split
-import org.clubcode.library.math.IntVector2
+import org.clubcode.library.vector.IntVector2
 
 fun main() {
     val inputs = generateSequence(::readLine).split { it.isEmpty() }.map { it.toTile() }.toList()
