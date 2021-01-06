@@ -1,6 +1,7 @@
 use anyhow::Result;
 use day10::parse_ratings;
 
+/// Solves part 1 by sorting, counting the 1 and 3 differences and multiplying them.
 pub fn main() -> Result<()> {
     let mut ratings = parse_ratings()?;
     ratings.sort_unstable();
@@ -11,7 +12,9 @@ pub fn main() -> Result<()> {
             3 => (o, t + 1),
             _ => (o, t),
         });
-    println!("{}", (ones + 1) * (threes + 1));
 
+    // The input sequence does not include the starting 0 and ending maximum,
+    // so we have to add them to the counts before multiplying.
+    println!("{}", (ones + 1) * (threes + 1));
     Ok(())
 }
