@@ -79,4 +79,9 @@ class Test: GenericTest() {
     fun test10(){
         genericTest("/d/test10.in", "/d/test10.ans", ::main)
     }
+
+    @Test
+    fun test33(){
+        genericTest("/d/test33.in", "/d/test33.ans", ::main)
+    }
 }

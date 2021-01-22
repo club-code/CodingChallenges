@@ -52,12 +52,10 @@ data class SimpleAminoAcid(val id: Int) : AminoAcid() {
 }
 
 class ComplexAminoAcid(val left: AminoAcid, val right: AminoAcid) : AminoAcid() {
-    init {
-        complexIds.getOrPut(left.id() to right.id()) { complexIds.size }
-    }
+    val id: Int = complexIds.getOrPut(left.id() to right.id()) { complexIds.size }
 
     override fun id(): Int {
-        return complexIds[left.id() to right.id()]!!
+        return id
     }
 
     override fun toString(): String {
