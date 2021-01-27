@@ -3,7 +3,7 @@ CWD = $(notdir $(shell pwd))
 
 try-%:
 	@cat '$(RESOURCES)/$(CWD)/$(findstring input,$@)$(findstring sample,$@).in' \
-		| cargo +nightly run -q --bin part$(findstring 1,$@)$(findstring 2,$@)
+		| cargo +nightly run -q --release --bin part$(findstring 1,$@)$(findstring 2,$@)
 
 tall: test1 test2
 test%:
