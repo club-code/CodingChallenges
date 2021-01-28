@@ -3,7 +3,7 @@ use std::str::FromStr;
 
 use anyhow::{anyhow, Error, Result};
 
-pub type Value = i16;
+pub type Value = i32;
 
 #[derive(Debug, Clone)]
 pub enum Action {
