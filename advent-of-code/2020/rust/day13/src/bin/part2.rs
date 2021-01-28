@@ -3,6 +3,8 @@ use modinverse::modinverse;
 
 use day13::*;
 
+/// Solves part 2 using the chinese remainder: multiply all the IDs together
+/// and compute the negative sum of multiplied modular inverses.
 fn main() -> Result<()> {
     let buses = parse_notes()?.buses;
     let id_prod = buses.iter().map(|&(_, id)| id).product();

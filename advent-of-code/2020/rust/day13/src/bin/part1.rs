@@ -1,6 +1,8 @@
 use anyhow::Result;
 use day13::*;
 
+/// Solves part 1 by finding the bus with the minimum timestamp difference and
+/// computing its product with its id.
 fn main() -> Result<()> {
     let notes = parse_notes()?;
     let (min_id, min_ts) = notes

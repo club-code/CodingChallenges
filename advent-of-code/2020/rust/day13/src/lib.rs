@@ -1,13 +1,16 @@
 use anyhow::{anyhow, Result};
 use std::io::{self, BufRead};
 
+/// Integer type for values.
 pub type Value = i64;
 
+/// Simple named couple for the notes.
 pub struct Notes {
     pub timestamp: Value,
     pub buses: Vec<(Value, Value)>,
 }
 
+/// Parses the two lines from the standard input into the `Notes`.
 pub fn parse_notes() -> Result<Notes> {
     let stdin = io::stdin();
     let mut lines = stdin.lock().lines();
