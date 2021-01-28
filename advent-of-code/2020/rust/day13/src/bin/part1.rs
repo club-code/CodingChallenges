@@ -6,7 +6,7 @@ fn main() -> Result<()> {
     let (min_id, min_ts) = notes
         .buses
         .iter()
-        .map(|&id| {
+        .map(|&(_, id)| {
             let rest = notes.timestamp % id;
             (id, notes.timestamp + if rest != 0 { id - rest } else { 0 })
         })
