@@ -1,12 +1,15 @@
 use anyhow::{anyhow, Result};
 use day12::*;
 
+/// Solves part two by storing the waypoint offsets and rotating them when needed.
 fn main() -> Result<()> {
     let mut si = 0;
     let mut sj = 0;
     let mut wi = -1;
     let mut wj = 10;
 
+    // There is obviously repetition between left and right rotations, but I
+    // was lazy to do otherwise, for example with a recursive function...
     while let Some(action) = parse_action()? {
         match action {
             Action::North(value) => wi -= value,

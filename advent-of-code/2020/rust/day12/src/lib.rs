@@ -3,8 +3,10 @@ use std::str::FromStr;
 
 use anyhow::{anyhow, Error, Result};
 
+/// Integer type alias for action values.
 pub type Value = i32;
 
+/// Represents a navigation action as per the problem specification.
 #[derive(Debug, Clone)]
 pub enum Action {
     North(Value),
@@ -16,6 +18,7 @@ pub enum Action {
     Forward(Value),
 }
 
+/// Parsing implementation for `Action`.
 impl FromStr for Action {
     type Err = Error;
 
@@ -38,6 +41,7 @@ impl FromStr for Action {
     }
 }
 
+/// Parses the next available action from the standard input.
 pub fn parse_action() -> Result<Option<Action>> {
     io::stdin()
         .lock()
