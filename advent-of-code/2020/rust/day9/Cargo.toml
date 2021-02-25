@@ -1,0 +1,9 @@
+[package]
+name = "day9"
+version = "0.1.0"
+authors = ["Paul Mabileau <paulmabileau@hotmail.fr>"]
+edition = "2018"
+
+[dependencies]
+anyhow = "1.0"
+itertools = "0.9"
