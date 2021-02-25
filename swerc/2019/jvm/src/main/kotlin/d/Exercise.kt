@@ -3,8 +3,13 @@ package d
 import org.clubcode.library.number.pow
 import java.util.*
 
+var N = 0
+
 fun main() {
     val inputs = generateSequence(::readLine).toList()
+
+    N = inputs.size
+
     val first = inputs[0].toOperations().apply().toList()
     val second = inputs[1].toOperations().apply().toList()
 
@@ -52,7 +57,7 @@ data class SimpleAminoAcid(val id: Int) : AminoAcid() {
 }
 
 class ComplexAminoAcid(val left: AminoAcid, val right: AminoAcid) : AminoAcid() {
-    val id: Int = complexIds.getOrPut(left.id() to right.id()) { complexIds.size }
+    val id: Int = complexIds.getOrPut(left.id() to right.id()) { complexIds.size + N }
 
     override fun id(): Int {
         return id
